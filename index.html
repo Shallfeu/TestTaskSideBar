@@ -9,7 +9,23 @@
     <title>SideBar</title>
   </head>
   <body>
-    <div class="task" id="root"></div>
+    <div class="container">
+      <div class="home">
+        <div class="root" id="root"></div>
+        <div class="settings">
+          <div class="limit">
+            <label class="limit__title" for="limit">Write the entity of bar items:</label>
+            <input type="text" name="limit" id="limit" class="limit__input" />
+            <button type="button" class="limit__btn">Accept</button>
+          </div>
+          <div class="settings__btns">
+            <button type="button" class="settings__btn" id="name">Sort by name</button>
+            <button type="button" class="settings__btn" id="price">Sort by price</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="./index.js"></script>
   </body>
 </html>

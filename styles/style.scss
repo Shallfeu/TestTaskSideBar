@@ -1,39 +1,132 @@
-.tasks__list {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-.tasks__item {
-  position: relative;
-  max-width: 450px;
-  margin-bottom: 10px;
-  padding: 15px;
+.home {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  font-size: 18px;
-  font-weight: 600;
+.settings {
+  background-color: #1c2c3c;
+  padding: 25px;
+  height: 250px;
+  border-radius: 25px;
 
-  text-align: center;
-  border: 2px dashed #b2d9d0;
-  border-radius: 10px;
-  background-color: #dff2ef;
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
 
-  transition: background-color 0.5s;
+  &__btn {
+    padding: 10px 40px;
+    transition: 0.7s;
+    border-radius: 10px;
+    margin: 5px;
 
-  &:hover {
-    background-color: #2aa5a0;
-    cursor: pointer;
-    color: #1c2c3c;
+    font-size: 20px;
+    font-weight: 500;
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: #fd1c03;
+    }
   }
 }
 
-.tasks__item:last-child {
-  margin-bottom: 0;
+.limit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #45f3ff;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__btn {
+    margin-top: 15px;
+    padding: 10px 40px;
+    transition: 0.7s;
+    border-radius: 10px;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: #45f3ff;
+    }
+  }
+
+  &__input {
+    width: 300px;
+    height: 30px;
+    padding: 20px 10px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #45f3ff;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #45f3ff;
+
+    ::placeholder {
+      color: #45f3ff;
+    }
+
+    &:focus {
+      color: #45f3ff;
+    }
+  }
 }
 
-.tasks__item:hover .dropdown-content {
-  display: block;
+.bar {
+  &__item {
+    position: relative;
+    max-width: 300px;
+    margin-bottom: 10px;
+    padding: 15px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    text-align: center;
+    border: 2px dashed #b2d9d0;
+    border-radius: 10px;
+    background-color: #dff2ef;
+
+    transition: background-color 0.5s;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover .dropdown-content {
+      display: block;
+    }
+
+    &:hover {
+      background-color: #2aa5a0;
+      cursor: pointer;
+      color: #1c2c3c;
+    }
+  }
 }
 
 .selected {

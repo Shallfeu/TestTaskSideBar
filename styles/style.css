@@ -1,12 +1,96 @@
-.tasks__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-.tasks__item {
+.home {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.settings {
+  background-color: #1c2c3c;
+  padding: 25px;
+  height: 250px;
+  border-radius: 25px;
+}
+.settings__btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+.settings__btn {
+  padding: 10px 40px;
+  transition: 0.7s;
+  border-radius: 10px;
+  margin: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.settings__btn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #fd1c03;
+}
+
+.limit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.limit__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #45f3ff;
+}
+.limit__title:hover {
+  cursor: pointer;
+}
+.limit__btn {
+  margin-top: 15px;
+  padding: 10px 40px;
+  transition: 0.7s;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.limit__btn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #45f3ff;
+}
+.limit__input {
+  width: 300px;
+  height: 30px;
+  padding: 20px 10px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #45f3ff;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #45f3ff;
+}
+.limit__input ::-moz-placeholder {
+  color: #45f3ff;
+}
+.limit__input :-ms-input-placeholder {
+  color: #45f3ff;
+}
+.limit__input ::placeholder {
+  color: #45f3ff;
+}
+.limit__input:focus {
+  color: #45f3ff;
+}
+
+.bar__item {
   position: relative;
-  max-width: 450px;
+  max-width: 300px;
   margin-bottom: 10px;
   padding: 15px;
   font-size: 18px;
@@ -17,18 +101,16 @@
   background-color: #dff2ef;
   transition: background-color 0.5s;
 }
-.tasks__item:hover {
+.bar__item:last-child {
+  margin-bottom: 0;
+}
+.bar__item:hover .dropdown-content {
+  display: block;
+}
+.bar__item:hover {
   background-color: #2aa5a0;
   cursor: pointer;
   color: #1c2c3c;
-}
-
-.tasks__item:last-child {
-  margin-bottom: 0;
-}
-
-.tasks__item:hover .dropdown-content {
-  display: block;
 }
 
 .selected {

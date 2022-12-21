@@ -1,4 +1,5 @@
 const URL = 'https://dummyjson.com/products';
+const FIELDS = ['title', 'description', 'price'];
 
 const fetchData = async (limit = 10) => {
   const response = await fetch(`${URL}?limit=${limit}`);
@@ -6,8 +7,7 @@ const fetchData = async (limit = 10) => {
   return data;
 };
 
-const renderDropDown = (barItem, item) => {
-  const fields = ['title', 'description', 'price'];
+const renderDropDown = (barItem, item, fields) => {
   const dropBar = document.createElement('ul');
   dropBar.classList = 'dropdown-content';
 
@@ -23,29 +23,62 @@ const renderDropDown = (barItem, item) => {
   barItem.appendChild(dropBar);
 };
 
-const renderSideBar = async () => {
-  const data = await fetchData(15);
-  const products = data.products;
-  const root = document.getElementById('root');
+const renderSideBar = async (products, root) => {
   let sideBar = document.createElement('ul');
-  sideBar.classList = 'tasks__list';
-
+  sideBar.classList = 'bar__list';
+  // Рендерим эл-ты списка
   for (let el of products) {
     const barItem = document.createElement('li');
-    barItem.classList = 'tasks__item';
+    barItem.classList = 'bar__item';
     barItem.innerHTML = el.title;
-    renderDropDown(barItem, el);
+    renderDropDown(barItem, el, FIELDS);
     sideBar.appendChild(barItem);
   }
 
   root.appendChild(sideBar);
 };
 
-const start = async () => {
-  await renderSideBar();
+const changeValue = () => {
+  const input = document.getElementById('limit');
+  const inputBtn = document.querySelector('.limit__btn');
+  inputBtn.addEventListener('click', () => {
+    localStorage.setItem('entity', input.value);
+    location.reload();
+  });
+  const entity = localStorage.getItem('entity') ? localStorage.getItem('entity') : 10;
+  input.value = entity;
+  return entity;
+};
 
-  const listElement = document.querySelector('.tasks__list');
-  const elements = listElement.querySelectorAll('.tasks__item');
+const start = async () => {
+  const root = document.getElementById('root');
+  const entity = changeValue();
+
+  // Забираем данные
+  const data = await fetchData(entity);
+  const products = data.products;
+
+  const sortNameBtn = document.getElementById('name');
+  sortNameBtn.addEventListener('click', async () => {
+    const sortedProducts = products.sort(
+      (a, b) => a.title.toLowerCase().charCodeAt(0) - b.title.toLowerCase().charCodeAt(0),
+    );
+    document.querySelector('.bar__list').remove();
+    await renderSideBar(sortedProducts, root);
+  });
+
+  const sortPriceBtn = document.getElementById('price');
+  sortPriceBtn.addEventListener('click', async () => {
+    const sortedProducts = products.sort((a, b) => a['price'] - b['price']);
+    document.querySelector('.bar__list').remove();
+    await renderSideBar(sortedProducts, root);
+  });
+
+  // Рендерим основное меню
+  await renderSideBar(products, root);
+
+  const listElement = document.querySelector('.bar__list');
+  const elements = listElement.querySelectorAll('.bar__item');
 
   // Перебираем все элементы списка и присваиваем нужное значение
   for (const el of elements) {
@@ -72,7 +105,7 @@ const start = async () => {
     // 1. не на том элементе, который мы перемещаем,
     // 2. именно на элементе списка
     const isMoveable =
-      activeElement !== currentElement && currentElement.classList.contains(`tasks__item`);
+      activeElement !== currentElement && currentElement.classList.contains(`bar__item`);
 
     // Если нет, прерываем выполнение функции
     if (!isMoveable) {
@@ -109,7 +142,7 @@ const start = async () => {
     const activeElement = listElement.querySelector(`.selected`);
     const currentElement = evt.target;
     const isMoveable =
-      activeElement !== currentElement && currentElement.classList.contains(`tasks__item`);
+      activeElement !== currentElement && currentElement.classList.contains(`bar__item`);
 
     if (!isMoveable) {
       return;
